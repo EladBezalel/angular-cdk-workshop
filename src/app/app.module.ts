@@ -4,10 +4,12 @@ import { NgModule } from '@angular/core';
 import { OverlayModule } from '@angular/cdk/overlay';
 
 import { AppComponent } from './app.component';
+import { ColorPickerComponent } from './color-picker/color-picker.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ColorPickerComponent
   ],
   imports: [
     BrowserModule,
@@ -15,6 +17,9 @@ import { AppComponent } from './app.component';
     OverlayModule
   ],
   providers: [],
+  entryComponents: [
+    ColorPickerComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
