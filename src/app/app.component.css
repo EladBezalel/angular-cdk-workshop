@@ -1,0 +1,24 @@
+.header {
+  background-color: #3F51B5;
+  color: white;
+  display: flex;
+  align-content: center;
+  padding: 0 8px;
+  margin-bottom: 8px;
+}
+
+.content {
+  padding: 8px;
+}
+
+.color-picker-input {
+  border: none;
+  border-bottom: 1px solid rgba(0,0,0,.42);
+  background-color: transparent;
+  outline: none;
+  padding-bottom: 8px;
+}
+
+.color-picker-input:focus {
+  border-bottom: 2px solid #3f51b5;
+}
