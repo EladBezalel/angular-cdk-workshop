@@ -1,5 +1,17 @@
-import {Component, EventEmitter, Input, Output, TemplateRef, ViewChild} from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output, QueryList,
+  SimpleChanges,
+  TemplateRef,
+  ViewChild, ViewChildren
+} from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
+import {ColorDirective} from './color.directive';
+import {FocusKeyManager} from "@angular/cdk/a11y";
 
 @Component({
   selector: 'color-picker',
@@ -21,8 +33,10 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
     ])
   ]
 })
-export class ColorPickerComponent {
+export class ColorPickerComponent implements OnChanges, AfterViewInit {
+  private keyManager: FocusKeyManager<ColorDirective>;
   @ViewChild(TemplateRef) template: TemplateRef<any>;
+  @ViewChildren(ColorDirective) gridCells: QueryList<ColorDirective>;
 
   @Input() colors: string[];
 
@@ -30,7 +44,28 @@ export class ColorPickerComponent {
 
   @Output() valueChange: EventEmitter<string> = new EventEmitter();
 
+  private groupedColors: string[][];
+
   select(color) {
     this.valueChange.emit(color);
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.colors) {
+      const chunkSize = 4;
+      this.groupedColors =
+        this.colors.map((_, i) => !(i % chunkSize) ? this.colors.slice(i, i + chunkSize) : null)
+          .filter(Boolean);
+    }
+  }
+
+  ngAfterViewInit() {
+    this.keyManager = new FocusKeyManager(this.gridCells).withWrap();
+    this.keyManager.withHorizontalOrientation('ltr');
+    this.keyManager.withVerticalOrientation(false);
+  }
+
+  onKeyDown(ev: KeyboardEvent) {
+    this.keyManager.onKeydown(ev);
   }
 }

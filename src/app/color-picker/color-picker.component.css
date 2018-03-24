@@ -5,9 +5,14 @@
   overflow: hidden;
   padding: 8px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: wrap;
   transform-origin: left top;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
 }
 
 .color {
