@@ -40,15 +40,15 @@ export class ColorPickerComponent implements OnChanges, AfterViewInit {
   @ViewChild(TemplateRef) template: TemplateRef<any>;
   @ViewChildren(ColorDirective) gridCells: QueryList<ColorDirective>;
 
-  @Input() colors: string[];
+  @Input() colors: object[];
 
-  @Input() value: string;
+  @Input() value: object;
 
   @Input() rowSize = 4;
 
-  @Output() valueChange: EventEmitter<string> = new EventEmitter();
+  @Output() valueChange: EventEmitter<object> = new EventEmitter();
 
-  private groupedColors: string[][];
+  private groupedColors: object[][];
 
   select(color) {
     this.valueChange.emit(color);
@@ -73,7 +73,7 @@ export class ColorPickerComponent implements OnChanges, AfterViewInit {
   }
 
   setActiveItem(value) {
-    if (value) {
+    if (value && this.keyManager) {
       this.keyManager.setActiveItem(this.colors.indexOf(value));
     }
   }
@@ -82,7 +82,7 @@ export class ColorPickerComponent implements OnChanges, AfterViewInit {
     this.keyManager.onKeydown(ev);
   }
 
-  onGridCellKeyDown(ev: KeyboardEvent, color: string) {
+  onGridCellKeyDown(ev: KeyboardEvent, color) {
     if (ev.keyCode === ENTER || ev.keyCode === SPACE) {
       ev.preventDefault();
 
@@ -90,6 +90,7 @@ export class ColorPickerComponent implements OnChanges, AfterViewInit {
     }
 
     if (ev.keyCode === UP_ARROW) {
+      console.log('up');
       const index = this.keyManager.activeItemIndex - this.rowSize;
       this.keyManager.setActiveItem(index > 0 ? index : this.keyManager.activeItemIndex);
     }
