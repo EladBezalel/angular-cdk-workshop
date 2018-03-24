@@ -7,7 +7,7 @@ import {take} from 'rxjs/operators/take';
 @Directive({
   selector: '[color-picker-trigger]',
   host: {
-    '(click)': 'click()'
+    '(click)': 'click($event)'
   }
 })
 export class ColorPickerTriggerDirective {
@@ -19,7 +19,6 @@ export class ColorPickerTriggerDirective {
 
   private init() {
     const overlayConfig: OverlayConfig = new OverlayConfig({
-      maxWidth: 250,
       hasBackdrop: true,
       backdropClass: 'cdk-overlay-transparent-backgorund'
     });
@@ -40,14 +39,18 @@ export class ColorPickerTriggerDirective {
       .subscribe(() => this._overlayRef.detach());
   }
 
-  click() {
+  click(ev) {
     if (!this._overlayRef) {
       this.init();
     }
 
+    console.log(ev)
     this.colorPicker.valueChange
       .pipe(take(1))
-      .subscribe(() => this._overlayRef.detach());
+      .subscribe(() => {
+      console.log('asdf');
+        this._overlayRef.detach()
+      });
 
     this._overlayRef.detach();
     const picker = new TemplatePortal(this.colorPicker.template, this.viewContainerRef);

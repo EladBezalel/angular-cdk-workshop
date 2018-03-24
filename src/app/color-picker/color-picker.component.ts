@@ -11,7 +11,8 @@ import {
 } from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {ColorDirective} from './color.directive';
-import {FocusKeyManager} from "@angular/cdk/a11y";
+import {FocusKeyManager} from '@angular/cdk/a11y';
+import {DOWN_ARROW, ENTER, SPACE, UP_ARROW} from '@angular/cdk/keycodes';
 
 @Component({
   selector: 'color-picker',
@@ -35,12 +36,15 @@ import {FocusKeyManager} from "@angular/cdk/a11y";
 })
 export class ColorPickerComponent implements OnChanges, AfterViewInit {
   private keyManager: FocusKeyManager<ColorDirective>;
+
   @ViewChild(TemplateRef) template: TemplateRef<any>;
   @ViewChildren(ColorDirective) gridCells: QueryList<ColorDirective>;
 
   @Input() colors: string[];
 
   @Input() value: string;
+
+  @Input() rowSize = 4;
 
   @Output() valueChange: EventEmitter<string> = new EventEmitter();
 
@@ -52,11 +56,12 @@ export class ColorPickerComponent implements OnChanges, AfterViewInit {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.colors) {
-      const chunkSize = 4;
       this.groupedColors =
-        this.colors.map((_, i) => !(i % chunkSize) ? this.colors.slice(i, i + chunkSize) : null)
+        this.colors.map((_, i) => !(i % this.rowSize) ? this.colors.slice(i, i + this.rowSize) : null)
           .filter(Boolean);
     }
+
+    this.setActiveItem(this.value);
   }
 
   ngAfterViewInit() {
@@ -64,12 +69,34 @@ export class ColorPickerComponent implements OnChanges, AfterViewInit {
       .withHorizontalOrientation('ltr')
       .withVerticalOrientation(false);
 
-    if (this.value) {
-      this.keyManager.setActiveItem(this.colors.indexOf(this.value));
+    this.setActiveItem(this.value);
+  }
+
+  setActiveItem(value) {
+    if (value) {
+      this.keyManager.setActiveItem(this.colors.indexOf(value));
     }
   }
 
   onKeyDown(ev: KeyboardEvent) {
     this.keyManager.onKeydown(ev);
+  }
+
+  onGridCellKeyDown(ev: KeyboardEvent, color: string) {
+    if (ev.keyCode === ENTER || ev.keyCode === SPACE) {
+      ev.preventDefault();
+
+      this.select(color);
+    }
+
+    if (ev.keyCode === UP_ARROW) {
+      const index = this.keyManager.activeItemIndex - this.rowSize;
+      this.keyManager.setActiveItem(index > 0 ? index : this.keyManager.activeItemIndex);
+    }
+
+    if (ev.keyCode === DOWN_ARROW) {
+      const index = this.keyManager.activeItemIndex + this.rowSize;
+      this.keyManager.setActiveItem(index < this.colors.length ? index : this.keyManager.activeItemIndex);
+    }
   }
 }
