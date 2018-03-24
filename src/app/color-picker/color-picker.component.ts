@@ -7,9 +7,9 @@ import {Component, EventEmitter, Input, Output, TemplateRef, ViewChild} from '@a
   exportAs: 'colorPicker'
 })
 export class ColorPickerComponent {
-  @ViewChild(TemplateRef) template: TemplateRef;
+  @ViewChild(TemplateRef) template: TemplateRef<any>;
 
-  @Input() colors: Array;
+  @Input() colors: string[];
 
   @Input() value: string;
 
