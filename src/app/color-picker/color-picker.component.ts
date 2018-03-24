@@ -60,9 +60,13 @@ export class ColorPickerComponent implements OnChanges, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.keyManager = new FocusKeyManager(this.gridCells).withWrap();
-    this.keyManager.withHorizontalOrientation('ltr');
-    this.keyManager.withVerticalOrientation(false);
+    this.keyManager = new FocusKeyManager(this.gridCells)
+      .withHorizontalOrientation('ltr')
+      .withVerticalOrientation(false);
+
+    if (this.value) {
+      this.keyManager.setActiveItem(this.colors.indexOf(this.value));
+    }
   }
 
   onKeyDown(ev: KeyboardEvent) {
