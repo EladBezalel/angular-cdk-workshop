@@ -15,8 +15,7 @@ export class ColorPickerTriggerDirective {
 
   @Input('color-picker-trigger') colorPicker: ColorPickerComponent;
 
-  constructor(public overlay: Overlay, private elementRef: ElementRef, private viewContainerRef: ViewContainerRef) {
-  }
+  constructor(public overlay: Overlay, private elementRef: ElementRef, private viewContainerRef: ViewContainerRef) {}
 
   private init() {
     const overlayConfig: OverlayConfig = new OverlayConfig({
@@ -26,7 +25,11 @@ export class ColorPickerTriggerDirective {
     });
 
     overlayConfig.positionStrategy = this.overlay
-      .position().connectedTo(this.elementRef, {originX: 'start', originY: 'bottom'}, {
+      .position()
+      .connectedTo(this.elementRef, {
+        originX: 'start',
+        originY: 'bottom'
+      }, {
         overlayX: 'start',
         overlayY: 'top'
       });
