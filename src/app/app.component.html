@@ -1,6 +1,8 @@
-<div class="header">
+<div class="header" [ngStyle]="{backgroundColor: selectedValue}">
   <h2>Welcome to the CDK workshop</h2>
 </div>
 <div class="content">
-  <button (click)="click()" #btn>yoyo</button>
+  <span>{{selectedValue}}</span>
+  <button [color-picker-trigger]="colorPicker">yoyo</button>
 </div>
+<color-picker #colorPicker [colors]="colors" [(value)]="selectedValue"></color-picker>

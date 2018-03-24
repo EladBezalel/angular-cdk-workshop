@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, Output, TemplateRef, ViewChild} from '@angular/core';
 
 @Component({
   selector: 'color-picker',
@@ -6,10 +6,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./color-picker.component.css'],
   exportAs: 'colorPicker'
 })
-export class ColorPickerComponent implements OnInit {
-  constructor() { }
+export class ColorPickerComponent {
+  @ViewChild(TemplateRef) template: TemplateRef;
 
-  ngOnInit() {
+  @Input() colors: Array;
+
+  @Input() value: string;
+
+  @Output() valueChange: EventEmitter<string> = new EventEmitter();
+
+  select(color) {
+    this.valueChange.emit(color);
   }
-
 }

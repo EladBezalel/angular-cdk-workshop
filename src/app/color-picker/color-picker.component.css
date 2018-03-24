@@ -4,4 +4,22 @@
   box-shadow: 0 1px 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);
   overflow: hidden;
   padding: 8px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.color {
+  height: 50px;
+  width: 50px;
+  margin: 4px;
+  border-radius: 3px;
+  border: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.color svg {
+  fill: white;
 }
