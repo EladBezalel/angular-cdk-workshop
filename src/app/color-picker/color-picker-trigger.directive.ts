@@ -39,18 +39,14 @@ export class ColorPickerTriggerDirective {
       .subscribe(() => this._overlayRef.detach());
   }
 
-  click(ev) {
+  click() {
     if (!this._overlayRef) {
       this.init();
     }
 
-    console.log(ev)
     this.colorPicker.valueChange
       .pipe(take(1))
-      .subscribe(() => {
-      console.log('asdf');
-        this._overlayRef.detach()
-      });
+      .subscribe(() => this._overlayRef.detach());
 
     this._overlayRef.detach();
     const picker = new TemplatePortal(this.colorPicker.template, this.viewContainerRef);

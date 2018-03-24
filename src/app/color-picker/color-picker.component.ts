@@ -90,7 +90,6 @@ export class ColorPickerComponent implements OnChanges, AfterViewInit {
     }
 
     if (ev.keyCode === UP_ARROW) {
-      console.log('up');
       const index = this.keyManager.activeItemIndex - this.rowSize;
       this.keyManager.setActiveItem(index > 0 ? index : this.keyManager.activeItemIndex);
     }
