@@ -1,4 +1,4 @@
-import {Component, Input, TemplateRef, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, Output, TemplateRef, ViewChild} from '@angular/core';
 
 @Component({
   selector: 'color-picker',
@@ -8,6 +8,13 @@ import {Component, Input, TemplateRef, ViewChild} from '@angular/core';
 })
 export class ColorPickerComponent {
   @Input() colors: object[];
+  @Input() value: object;
+
+  @Output() valueChange: EventEmitter<object> = new EventEmitter();
 
   @ViewChild(TemplateRef) template: TemplateRef<any>;
+
+  select(color) {
+    this.valueChange.emit(color);
+  }
 }

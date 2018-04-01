@@ -6,12 +6,14 @@ import {Component} from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  selectedColor = {name: 'Indigo', value: '#3F51B5'};
+
   colors = [
     {name: 'Red', value: '#F44336'},
     {name: 'Pink', value: '#E91E63'},
     {name: 'Purple', value: '#9C27B0'},
     {name: 'Deep Purple', value: '#673AB7'},
-    {name: 'Indigo', value: '#3F51B5'},
+    this.selectedColor,
     {name: 'Blue', value: '#2196F3'},
     {name: 'Light Blue', value: '#03A9F4'},
     {name: 'Cyan', value: '#00BCD4'},

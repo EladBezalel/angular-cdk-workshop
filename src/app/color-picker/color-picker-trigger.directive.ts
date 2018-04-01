@@ -2,6 +2,8 @@ import {Directive, ElementRef, Input, ViewContainerRef} from '@angular/core';
 import {Overlay, OverlayConfig, OverlayRef} from '@angular/cdk/overlay';
 import {TemplatePortal} from '@angular/cdk/portal';
 
+import {first} from 'rxjs/operators/first';
+
 import {ColorPickerComponent} from './color-picker.component';
 
 @Directive({
@@ -43,6 +45,10 @@ export class ColorPickerTriggerDirective {
     if (!this._overlayRef) {
       this.init();
     }
+
+    this.colorPicker.valueChange
+      .pipe(first())
+      .subscribe(() => this._overlayRef.detach());
 
     this._overlayRef.detach();
     const picker = new TemplatePortal(this.colorPicker.template, this.viewContainerRef);
