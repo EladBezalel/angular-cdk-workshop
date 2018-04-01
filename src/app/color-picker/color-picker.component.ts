@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, Output, TemplateRef, ViewChild} from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
+import {Directionality} from '@angular/cdk/bidi';
 
 @Component({
   selector: 'color-picker',
@@ -28,6 +29,8 @@ export class ColorPickerComponent {
   @Output() valueChange: EventEmitter<object> = new EventEmitter();
 
   @ViewChild(TemplateRef) template: TemplateRef<any>;
+
+  constructor(public dir: Directionality){}
 
   select(color) {
     this.valueChange.emit(color);
