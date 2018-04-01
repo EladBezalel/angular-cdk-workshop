@@ -5,6 +5,7 @@ import {TemplatePortal} from '@angular/cdk/portal';
 import {first} from 'rxjs/operators';
 
 import {ColorPickerComponent} from './color-picker.component';
+import {Directionality} from '@angular/cdk/bidi';
 
 @Directive({
   selector: '[color-picker-trigger]'
@@ -16,7 +17,8 @@ export class ColorPickerTriggerDirective {
 
   constructor(public overlay: Overlay,
               private elementRef: ElementRef,
-              private viewContainerRef: ViewContainerRef) {}
+              private viewContainerRef: ViewContainerRef,
+              private dir: Directionality) {}
 
   private init() {
     const positionStrategy =
@@ -29,6 +31,7 @@ export class ColorPickerTriggerDirective {
       maxWidth: 250,
       hasBackdrop: true,
       backdropClass: 'cdk-overlay-transparent-backdrop',
+      direction: this.dir.value,
       positionStrategy
     });
 
