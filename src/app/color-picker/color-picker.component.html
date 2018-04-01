@@ -1,5 +1,6 @@
 <ng-template>
-  <div class="container" role="grid" @picker cdkTrapFocus cdkTrapFocusAutoCapture (keydown)="onKeyDown($event)">
+  <div class="container" role="grid" @picker cdkTrapFocus cdkTrapFocusAutoCapture (keydown)="onKeyDown($event)"
+       [style.transformOrigin]="dir.value === 'ltr' ? 'left top' : 'right top'">
     <div class="row" role="row" *ngFor="let group of groupedColors">
       <div role="gridcell" [attr.tabindex]="color === value ? 0 : -1" [attr.aria-label]="color.name"
            class="color" [ngStyle]="{backgroundColor: color.value}"

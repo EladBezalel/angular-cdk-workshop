@@ -13,6 +13,7 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 import {ColorDirective} from './color.directive';
 import {FocusKeyManager} from '@angular/cdk/a11y';
 import {DOWN_ARROW, ENTER, SPACE, UP_ARROW} from '@angular/cdk/keycodes';
+import {Directionality} from '@angular/cdk/bidi';
 
 @Component({
   selector: 'color-picker',
@@ -50,6 +51,8 @@ export class ColorPickerComponent implements OnChanges, AfterViewInit {
 
   private groupedColors: object[][];
 
+  constructor(private dir: Directionality) {}
+
   select(color) {
     this.valueChange.emit(color);
   }
@@ -66,7 +69,7 @@ export class ColorPickerComponent implements OnChanges, AfterViewInit {
 
   ngAfterViewInit() {
     this.keyManager = new FocusKeyManager(this.gridCells)
-      .withHorizontalOrientation('ltr')
+      .withHorizontalOrientation(this.dir.value)
       .withVerticalOrientation(false);
 
     this.setActiveItem(this.value);

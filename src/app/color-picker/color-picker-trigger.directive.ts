@@ -3,6 +3,7 @@ import {ColorPickerComponent} from './color-picker.component';
 import {Overlay, OverlayConfig, OverlayRef} from '@angular/cdk/overlay';
 import {TemplatePortal} from '@angular/cdk/portal';
 import {take} from 'rxjs/operators/take';
+import {Directionality} from '@angular/cdk/bidi';
 
 @Directive({
   selector: '[color-picker-trigger]',
@@ -15,11 +16,15 @@ export class ColorPickerTriggerDirective {
 
   @Input('color-picker-trigger') colorPicker: ColorPickerComponent;
 
-  constructor(public overlay: Overlay, private elementRef: ElementRef, private viewContainerRef: ViewContainerRef) {}
+  constructor(public overlay: Overlay,
+              private elementRef: ElementRef,
+              private viewContainerRef: ViewContainerRef,
+              private dir: Directionality) {}
 
   private init() {
     const overlayConfig: OverlayConfig = new OverlayConfig({
       hasBackdrop: true,
+      direction: this.dir.value,
       backdropClass: 'cdk-overlay-transparent-backgorund'
     });
 
@@ -31,7 +36,8 @@ export class ColorPickerTriggerDirective {
       }, {
         overlayX: 'start',
         overlayY: 'top'
-      });
+      })
+      .withDirection(this.dir.value);
 
     this._overlayRef = this.overlay.create(overlayConfig);
 
