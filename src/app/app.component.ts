@@ -1,16 +1,11 @@
-import {AfterViewInit, Component, ElementRef, ViewChild, ViewContainerRef} from '@angular/core';
-import {Overlay, OverlayConfig, OverlayRef} from '@angular/cdk/overlay';
-import {TemplatePortal} from '@angular/cdk/portal';
-import {ColorPickerComponent} from './color-picker/color-picker.component';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements AfterViewInit {
-  private _overlayRef: OverlayRef;
-
+export class AppComponent {
   colors = [
     {name: 'Red', value: '#F44336'},
     {name: 'Pink', value: '#E91E63'},
@@ -32,28 +27,4 @@ export class AppComponent implements AfterViewInit {
     {name: 'Grey', value: '#9E9E9E'},
     {name: 'Blue Grey', value: '#607D8B'}
   ];
-
-  @ViewChild('btn') button: ElementRef;
-  @ViewChild(ColorPickerComponent) picker: ColorPickerComponent;
-
-  constructor(public overlay: Overlay, private viewContainerRef: ViewContainerRef) {}
-
-  ngAfterViewInit() {
-    const positionStrategy =
-      this.overlay
-      .position()
-      .connectedTo(this.button, {originX: 'start', originY: 'bottom'}, {overlayX: 'start', overlayY: 'top'});
-
-    const overlayConfig: OverlayConfig = new OverlayConfig(<OverlayConfig>{
-      positionStrategy
-    });
-
-    this._overlayRef = this.overlay.create(overlayConfig);
-  }
-
-  click() {
-    this._overlayRef.detach();
-    const picker = new TemplatePortal(this.picker.template, this.viewContainerRef);
-    this._overlayRef.attach(picker);
-  }
 }

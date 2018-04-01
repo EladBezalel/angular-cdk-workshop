@@ -2,6 +2,6 @@
   <h2>Welcome to the CDK workshop</h2>
 </div>
 <div class="content">
-  <button (click)="click()" #btn>click me</button>
+  <button [color-picker-trigger]="picker">click me</button>
 </div>
-<color-picker [colors]="colors"></color-picker>
+<color-picker [colors]="colors" #picker></color-picker>
