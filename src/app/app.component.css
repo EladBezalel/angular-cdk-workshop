@@ -4,7 +4,7 @@
   align-content: center;
   padding: 0 8px;
   margin-bottom: 8px;
-  background-color: #3F51B5;
+  transition: background-color .2s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .content {

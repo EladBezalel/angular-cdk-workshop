@@ -2,6 +2,8 @@ import {Directive, ElementRef, Input, ViewContainerRef, HostListener} from '@ang
 import {Overlay, OverlayConfig, OverlayRef} from '@angular/cdk/overlay';
 import {TemplatePortal} from '@angular/cdk/portal';
 
+import {first} from 'rxjs/operators';
+
 import {ColorPickerComponent} from './color-picker.component';
 
 @Directive({
@@ -20,7 +22,8 @@ export class ColorPickerTriggerDirective {
     const positionStrategy =
       this.overlay
         .position()
-        .connectedTo(this.elementRef, {originX: 'start', originY: 'bottom'}, {overlayX: 'start', overlayY: 'top'});
+        .flexibleConnectedTo(this.elementRef)
+        .withPositions([{originX: 'start', originY: 'bottom', overlayX: 'start', overlayY: 'top'}]);
 
     const overlayConfig: OverlayConfig = new OverlayConfig(<OverlayConfig>{
       maxWidth: 250,
@@ -41,6 +44,10 @@ export class ColorPickerTriggerDirective {
     if (!this._overlayRef) {
       this.init();
     }
+
+    this.colorPicker.valueChange
+      .pipe(first())
+      .subscribe(() => this._overlayRef.detach());
 
     this._overlayRef.detach();
     const picker = new TemplatePortal(this.colorPicker.template, this.viewContainerRef);
