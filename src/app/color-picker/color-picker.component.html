@@ -1,5 +1,5 @@
 <ng-template>
-  <div class="container">
+  <div class="container" @picker>
     <div *ngFor="let color of colors" (click)="select(color)"
          class="color" [ngStyle]="{backgroundColor: color.value}">
       <svg *ngIf="color === value" height="24" width="24" xmlns="http://www.w3.org/2000/svg">
