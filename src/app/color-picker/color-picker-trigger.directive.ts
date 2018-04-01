@@ -22,7 +22,7 @@ export class ColorPickerTriggerDirective {
               private dir: Directionality) {}
 
   private init() {
-    const overlayConfig: OverlayConfig = new OverlayConfig({
+    const overlayConfig: OverlayConfig = new OverlayConfig(<OverlayConfig>{
       hasBackdrop: true,
       direction: this.dir.value,
       backdropClass: 'cdk-overlay-transparent-backgorund'
