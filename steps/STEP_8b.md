@@ -63,7 +63,7 @@ structure and to add the appropriate ARIA roles.
        [style.transformOrigin]="dir.value === 'ltr' ? 'left top' : 'right top'">
     <div class="row" role="row" *ngFor="let group of groupedColors">
       <color *ngFor="let color of group" (click)="select(color)"
-             role="cell" (keydown)="onGridCellKeyDown($event, color)"
+             role="gridcell" (keydown)="onGridCellKeyDown($event, color)"
              [attr.tabindex]="color === value ? 0 : -1"
              [isSelected]="color === value" [color]="color">
       </color>
