@@ -1,6 +1,20 @@
-import {Component, EventEmitter, Input, Output, TemplateRef, ViewChild} from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
+  QueryList,
+  TemplateRef,
+  ViewChild,
+  ViewChildren
+} from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {Directionality} from '@angular/cdk/bidi';
+import {FocusKeyManager} from '@angular/cdk/a11y';
+
+import {ColorComponent} from './color/color.component';
 
 @Component({
   selector: 'color-picker',
@@ -22,17 +36,43 @@ import {Directionality} from '@angular/cdk/bidi';
     ])
   ]
 })
-export class ColorPickerComponent {
+export class ColorPickerComponent implements OnChanges, AfterViewInit {
+  private keyManager: FocusKeyManager<ColorComponent>;
+
   @Input() colors: object[];
   @Input() value: object;
 
   @Output() valueChange: EventEmitter<object> = new EventEmitter();
 
   @ViewChild(TemplateRef) template: TemplateRef<any>;
+  @ViewChildren(ColorComponent) colorComponents: QueryList<ColorComponent>;
 
-  constructor(public dir: Directionality){}
+  constructor(public dir: Directionality) {
+  }
 
   select(color) {
     this.valueChange.emit(color);
+  }
+
+  ngOnChanges() {
+    this.setActiveItem(this.value);
+  }
+
+  ngAfterViewInit() {
+    this.keyManager = new FocusKeyManager(this.colorComponents)
+      .withHorizontalOrientation(this.dir.value)
+      .withVerticalOrientation(false);
+
+    this.setActiveItem(this.value);
+  }
+
+  setActiveItem(value) {
+    if (value && this.keyManager) {
+      this.keyManager.setActiveItem(this.colors.indexOf(value));
+    }
+  }
+
+  onKeyDown(ev: KeyboardEvent) {
+    this.keyManager.onKeydown(ev);
   }
 }
