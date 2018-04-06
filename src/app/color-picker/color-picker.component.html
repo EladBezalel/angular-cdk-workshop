@@ -1,10 +1,15 @@
 <ng-template>
-  <div class="container" @picker (keydown)="onKeyDown($event)"
+  <div class="container" @picker
+       role="grid"
+       (keydown)="onKeyDown($event)"
        cdkTrapFocus cdkTrapFocusAutoCapture
        [style.transformOrigin]="dir.value === 'ltr' ? 'left top' : 'right top'">
-    <color *ngFor="let color of colors" (click)="select(color)"
-           [attr.tabindex]="color === value ? 0 : -1"
-           [isSelected]="color === value" [color]="color">
-    </color>
+    <div class="row" role="row" *ngFor="let group of groupedColors">
+      <color *ngFor="let color of group" (click)="select(color)"
+             role="gridcell" (keydown)="onGridCellKeyDown($event, color)"
+             [attr.tabindex]="color === value ? 0 : -1"
+             [isSelected]="color === value" [color]="color">
+      </color>
+    </div>
   </div>
 </ng-template>

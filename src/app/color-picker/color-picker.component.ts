@@ -6,6 +6,7 @@ import {
   OnChanges,
   Output,
   QueryList,
+  SimpleChanges,
   TemplateRef,
   ViewChild,
   ViewChildren
@@ -15,6 +16,7 @@ import {Directionality} from '@angular/cdk/bidi';
 import {FocusKeyManager} from '@angular/cdk/a11y';
 
 import {ColorComponent} from './color/color.component';
+import {DOWN_ARROW, ENTER, SPACE, UP_ARROW} from "@angular/cdk/keycodes";
 
 @Component({
   selector: 'color-picker',
@@ -38,9 +40,11 @@ import {ColorComponent} from './color/color.component';
 })
 export class ColorPickerComponent implements OnChanges, AfterViewInit {
   private keyManager: FocusKeyManager<ColorComponent>;
+  private groupedColors: object[][];
 
   @Input() colors: object[];
   @Input() value: object;
+  @Input() rowSize = 4;
 
   @Output() valueChange: EventEmitter<object> = new EventEmitter();
 
@@ -54,7 +58,14 @@ export class ColorPickerComponent implements OnChanges, AfterViewInit {
     this.valueChange.emit(color);
   }
 
-  ngOnChanges() {
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.colors) {
+      this.groupedColors =
+        this.colors
+          .map((_, i) => !(i % this.rowSize) ? this.colors.slice(i, i + this.rowSize) : null)
+          .filter(Boolean);
+    }
+
     this.setActiveItem(this.value);
   }
 
@@ -74,5 +85,23 @@ export class ColorPickerComponent implements OnChanges, AfterViewInit {
 
   onKeyDown(ev: KeyboardEvent) {
     this.keyManager.onKeydown(ev);
+  }
+
+  onGridCellKeyDown(ev: KeyboardEvent, color) {
+    if (ev.keyCode === ENTER || ev.keyCode === SPACE) {
+      ev.preventDefault();
+
+      this.select(color);
+    }
+
+    if (ev.keyCode === UP_ARROW) {
+      const index = this.keyManager.activeItemIndex - this.rowSize;
+      this.keyManager.setActiveItem(index >= 0 ? index : this.keyManager.activeItemIndex);
+    }
+
+    if (ev.keyCode === DOWN_ARROW) {
+      const index = this.keyManager.activeItemIndex + this.rowSize;
+      this.keyManager.setActiveItem(index < this.colors.length ? index : this.keyManager.activeItemIndex);
+    }
   }
 }
