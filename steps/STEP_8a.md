@@ -24,10 +24,9 @@ import { A11yModule } from '@angular/cdk/a11y';
 export class AppModule {}
 ```
 
-Afterwards we need to split out the individual color cells into their own component. This is
-will clean up the color picker's template and will allow us to use the keyboard management
-utilities from the CDK which require instances of a component that implements the `FocusableOption`
-interface.
+Afterwards we need to split out the individual color cells into their own component. This will
+clean up the color picker's template and will allow us to use the keyboard management utilities
+from the CDK which require instances of a component that implements the `FocusableOption` interface.
 
 ###### Create a new file: `src/app/color-picker/color/color.component.ts`
 
@@ -82,7 +81,7 @@ export class ColorComponent implements FocusableOption {
 }
 ```
 
-Now that we've created the component, we need to declare it in our module and we need to put it
+After we've created the component, we need to declare it in our module and we need to put it
 into the color picker component.
 
 ###### File: `src/app/app.module.ts`
@@ -117,7 +116,7 @@ export class AppModule {}
 ```
 
 Now that we've got the `color` in a separate component, we can set up a `FocusKeyManager` which
-will keep track of which `color` cell is focused and will move focus to the next/previous cell
+will keep track of which `color` cell is focused and will move focus to the next/previous cells
 when the user presses the `left`/`right` arrow keys.
 
 ###### File: `src/app/color-picker/color-picker.component.ts`
@@ -151,12 +150,37 @@ export class ColorPickerComponent implements AfterViewInit {
 }
 ```
 
+The keyboard controls we have now work correctly, however if the user changes the value, closes
+the panel and then reopens it, the focused item might be incorrect. To handle this case, we have
+to add a `ngOnChanges` hook which will update the active index when the value changes.
+
+```ts
+export class ColorPickerComponent implements AfterViewInit, OnChanges {
+  ngOnChanges() {
+    this.setActiveItem(this.value);
+  }
+
+  ...
+}
+```
+
+Finally, we want to trap the user's focus inside the color picker, otherwise it can get behind the
+panel if they press tab. To trap the user's focus we can use the `cdkTrapFocus` directive from the
+CDK which will prevent focus from escaping an area. We also set the `cdkTrapFocusAutoCapture` which
+will tell the focus trap to move focus into the trapped area as soon as it's initialized.
 
 
+###### File: `src/app/color-picker/color-picker.component.html`
 
-
-In this step
-
-- Add basic support for left/right arrows.
-- Add ngOnChanges to ensure that focus starts off from the correct color.
-- add focus trapping
+```html
+<ng-template>
+  <div class="container" @picker (keydown)="onKeyDown($event)"
+       cdkTrapFocus cdkTrapFocusAutoCapture
+       [style.transformOrigin]="dir.value === 'ltr' ? 'left top' : 'right top'">
+    <color *ngFor="let color of colors" (click)="select(color)"
+           [attr.tabindex]="color === value ? 0 : -1"
+           [isSelected]="color === value" [color]="color">
+    </color>
+  </div>
+</ng-template>
+```
