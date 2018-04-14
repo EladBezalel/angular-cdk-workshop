@@ -146,7 +146,7 @@ Once a color is selected, we can make the overlay close so the user doesn't have
 ###### File: `src/app/color-picker/color-picker-trigger.directive.ts`
 
 ```ts
-import {first} from 'rxjs/operators/first';
+import { first } from 'rxjs/operators/first';
 
 export class ColorPickerTriggerDirective {
   private _overlayRef: OverlayRef;
