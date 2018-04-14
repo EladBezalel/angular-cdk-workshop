@@ -23,7 +23,9 @@ Afterwards we need to add the correct ARIA roles to the various color picker com
 we have to use the `grid` role for the color picker itself, `gridcell` for the individual colors
 and we need to wrap the cells in an element that has a role of `row`. To do so, we must first
 reorganize the passed-in colors into a 2D array which will make it easier to output the color
-cells into rows, rather than a flat list, when using `ngFor` in the template.
+cells into rows, rather than a flat list, when using `ngFor` in the template. Having the colors
+be organized in rows will also make it a lot easier to implement the up arrow and down arrow
+keyboard controls a little bit later.
 
 ###### File: `src/app/color-picker/color-picker.component.ts`
 

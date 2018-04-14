@@ -108,7 +108,6 @@ export class AppModule {}
   <div class="container" @picker (keydown)="onKeyDown($event)"
        [style.transformOrigin]="dir.value === 'ltr' ? 'left top' : 'right top'">
     <color *ngFor="let color of colors" (click)="select(color)"
-           [attr.tabindex]="color === value ? 0 : -1"
            [isSelected]="color === value" [color]="color">
     </color>
   </div>
@@ -164,11 +163,26 @@ export class ColorPickerComponent implements AfterViewInit, OnChanges {
 }
 ```
 
+Afterwards we have to add a `tabindex` to each of the `color` components. This will ensure that
+the tabs can be focused and that the selected `color` is first in the tab order.
+
+###### File: `src/app/color-picker/color-picker.component.html`
+
+```html
+...
+<color *ngFor="let color of colors"
+        (click)="select(color)"
+        [isSelected]="color === value"
+        [color]="color"
+        [attr.tabindex]="color === value ? 0 : -1">
+</color>
+...
+```
+
 Finally, we want to trap the user's focus inside the color picker, otherwise it can get behind the
 panel if they press tab. To trap the user's focus we can use the `cdkTrapFocus` directive from the
 CDK which will prevent focus from escaping an area. We also set the `cdkTrapFocusAutoCapture` which
 will tell the focus trap to move focus into the trapped area as soon as it's initialized.
-
 
 ###### File: `src/app/color-picker/color-picker.component.html`
 
@@ -177,9 +191,11 @@ will tell the focus trap to move focus into the trapped area as soon as it's ini
   <div class="container" @picker (keydown)="onKeyDown($event)"
        cdkTrapFocus cdkTrapFocusAutoCapture
        [style.transformOrigin]="dir.value === 'ltr' ? 'left top' : 'right top'">
-    <color *ngFor="let color of colors" (click)="select(color)"
-           [attr.tabindex]="color === value ? 0 : -1"
-           [isSelected]="color === value" [color]="color">
+    <color *ngFor="let color of colors"
+        (click)="select(color)"
+        [isSelected]="color === value"
+        [color]="color"
+        [attr.tabindex]="color === value ? 0 : -1">
     </color>
   </div>
 </ng-template>
