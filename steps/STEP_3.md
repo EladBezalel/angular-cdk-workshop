@@ -1,10 +1,23 @@
-## Step 3 task
+#### Quick Jump ####
+* [Step 1](./STEP_1.md)
+* [Step 2](./STEP_2.md)
+* **Step 3 <-**
+* [Step 4](./STEP_4.md)
+* [Step 5](./STEP_4.md)
+* [Step 6](./STEP_6.md)
+* [Step 7](./STEP_7.md)
+* [Step 8a](./STEP_8a.md)
+* [Step 8b](./STEP_8b.md)
+
+### [Demo](https://stackblitz.com/github/EladBezalel/ngconf-cdk-workshop/tree/step-3)
+
+## Step 3 task:
 
 In this step we're going to create an Overlay out of our latest build, the `color-picker` component.
 That means that this component can be opened on screen in a specific position (also known as modal or panel)
 
 First thing, before attaching the open functionality to the button, we'd like to turn the content into an `ng-template`.
-We're going to create a `TemplatePortal` out of the `ng-template`, which will be used as a template whenever the overlay is attached, 
+We're going to create a `TemplatePortal` out of the `ng-template`, which will be used as a template whenever the overlay is attached,
 this step is crucial since a new instance of the component will be created on every button click.
 
 All we have to do is to wrap the current HTML with `ng-template`
@@ -55,7 +68,7 @@ Now, in the `app.component` we implement the overlay initialization in considera
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
- 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -79,7 +92,7 @@ export class AppComponent implements AfterViewInit {
     });
 
     this._overlayRef = this.overlay.create(overlayConfig);
-  }  
+  }
 }
 ```
 
@@ -96,7 +109,7 @@ export class AppComponent implements AfterViewInit {
   @ViewChild(ColorPickerComponent) picker: ColorPickerComponent;
 
   constructor(public overlay: Overlay, private viewContainerRef: ViewContainerRef) {}
-  
+
   click() {
     this._overlayRef.detach();
     const picker = new TemplatePortal(this.picker.template, this.viewContainerRef);

@@ -1,3 +1,16 @@
+#### Quick Jump ####
+* [Step 1](./STEP_1.md)
+* [Step 2](./STEP_2.md)
+* [Step 3](./STEP_3.md)
+* [Step 4](./STEP_4.md)
+* **Step 5 <-**
+* [Step 6](./STEP_6.md)
+* [Step 7](./STEP_7.md)
+* [Step 8a](./STEP_8a.md)
+* [Step 8b](./STEP_8b.md)
+
+### [Demo](https://stackblitz.com/github/EladBezalel/ngconf-cdk-workshop/tree/step-5)
+
 ## Step 5 task:
 
 In this step we're going to add the ability to select a color using a

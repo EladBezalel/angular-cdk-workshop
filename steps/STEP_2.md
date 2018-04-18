@@ -1,4 +1,17 @@
-## Step 2 task
+#### Quick Jump ####
+* [Step 1](./STEP_1.md)
+* **Step 2 <-**
+* [Step 3](./STEP_3.md)
+* [Step 4](./STEP_4.md)
+* [Step 5](./STEP_4.md)
+* [Step 6](./STEP_6.md)
+* [Step 7](./STEP_7.md)
+* [Step 8a](./STEP_8a.md)
+* [Step 8b](./STEP_8b.md)
+
+### [Demo](https://stackblitz.com/github/EladBezalel/ngconf-cdk-workshop/tree/step-2)
+
+## Step 2 task:
 
 In this step we are going to create our color picker component that will get a list of colors and show them one next to each other.
 
@@ -61,7 +74,7 @@ import { ColorPickerComponent } from './color-picker/color-picker.component';
 
 Now that we have our component ready, let's use it!
 
-Add pre-made color list to our app component in order to pass it down to the color picker. 
+Add pre-made color list to our app component in order to pass it down to the color picker.
 ##### File: `src/app/app.component.ts`
 ```typescript
 export class AppComponent {

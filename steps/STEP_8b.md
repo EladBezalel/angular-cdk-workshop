@@ -1,3 +1,16 @@
+#### Quick Jump ####
+* [Step 1](./STEP_1.md)
+* [Step 2](./STEP_2.md)
+* [Step 3](./STEP_3.md)
+* [Step 4](./STEP_4.md)
+* [Step 5](./STEP_5.md)
+* [Step 6](./STEP_6.md)
+* [Step 7](./STEP_7.md)
+* [Step 8a](./STEP_8a.md)
+* **Step 8b <-**
+
+### [Demo](https://stackblitz.com/github/EladBezalel/ngconf-cdk-workshop/tree/step-8b)
+
 ## Step 8b task:
 
 In the previous step we added some very basic accessibility to the color picker component, however

@@ -1,4 +1,17 @@
-## Step 1
+#### Quick Jump ####
+* **Step 1 <-**
+* [Step 2](./STEP_2.md)
+* [Step 3](./STEP_3.md)
+* [Step 4](./STEP_4.md)
+* [Step 5](./STEP_4.md)
+* [Step 6](./STEP_6.md)
+* [Step 7](./STEP_7.md)
+* [Step 8a](./STEP_8a.md)
+* [Step 8b](./STEP_8b.md)
+
+### [Demo](https://stackblitz.com/github/EladBezalel/ngconf-cdk-workshop/tree/step-1)
+
+## Step 1 task:
 
 Since we want to build this beautiful component
 
@@ -20,7 +33,7 @@ Afterwards we are going to build our simple website with header and a button
 <div class="content">
   <button>click me</button>
 </div>
-``` 
+```
 add some styles for the header and the content wrapper
 
 `app/app.component.css`
@@ -46,7 +59,7 @@ We're going to import our first module out of the CDK, the [`OverlayModule`](htt
 import { OverlayModule } from '@angular/cdk/overlay';
 
 @NgModule({
-  ...  
+  ...
   imports: [
     BrowserModule,
     OverlayModule
@@ -55,7 +68,7 @@ import { OverlayModule } from '@angular/cdk/overlay';
 })
 ```
 
-Last part of this step is to have some global styles 
+Last part of this step is to have some global styles
 
 ```css
 @import url('https://fonts.googleapis.com/css?family=Roboto');

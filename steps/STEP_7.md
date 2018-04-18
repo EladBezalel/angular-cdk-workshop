@@ -1,3 +1,16 @@
+#### Quick Jump ####
+* [Step 1](./STEP_1.md)
+* [Step 2](./STEP_2.md)
+* [Step 3](./STEP_3.md)
+* [Step 4](./STEP_4.md)
+* [Step 5](./STEP_5.md)
+* [Step 6](./STEP_6.md)
+* **Step 7 <-**
+* [Step 8a](./STEP_8a.md)
+* [Step 8b](./STEP_8b.md)
+
+### [Demo](https://stackblitz.com/github/EladBezalel/ngconf-cdk-workshop/tree/step-7)
+
 ## Step 7 task:
 
 In this step we're going to cover how you can make your color picker support both left-to-right and

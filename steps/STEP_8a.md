@@ -1,3 +1,16 @@
+#### Quick Jump ####
+* [Step 1](./STEP_1.md)
+* [Step 2](./STEP_2.md)
+* [Step 3](./STEP_3.md)
+* [Step 4](./STEP_4.md)
+* [Step 5](./STEP_5.md)
+* [Step 6](./STEP_6.md)
+* [Step 7](./STEP_7.md)
+* **Step 8a <-**
+* [Step 8b](./STEP_8b.md)
+
+### [Demo](https://stackblitz.com/github/EladBezalel/ngconf-cdk-workshop/tree/step-8a)
+
 ## Step 8a task:
 
 In this step we're going to start making the color picker component accessible to assistive

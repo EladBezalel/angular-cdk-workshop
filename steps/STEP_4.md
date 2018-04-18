@@ -1,4 +1,17 @@
-## Step 4
+#### Quick Jump ####
+* [Step 1](./STEP_1.md)
+* [Step 2](./STEP_2.md)
+* [Step 3](./STEP_3.md)
+* **Step 4 <-**
+* [Step 5](./STEP_5.md)
+* [Step 6](./STEP_6.md)
+* [Step 7](./STEP_7.md)
+* [Step 8a](./STEP_8a.md)
+* [Step 8b](./STEP_8b.md)
+
+### [Demo](https://stackblitz.com/github/EladBezalel/ngconf-cdk-workshop/tree/step-4)
+
+## Step 4 task:
 
 Since we want to make the Overlay functionality reuseable let's create a directive that encapsulates it for us.
 
@@ -34,7 +47,7 @@ export class ColorPickerTriggerDirective {
         .position()
         .connectedTo(this.elementRef, {originX: 'start', originY: 'bottom'}, {overlayX: 'start', overlayY: 'top'});
 
-    const overlayConfig = new OverlayConfig({      
+    const overlayConfig = new OverlayConfig({
       positionStrategy
     });
 
@@ -53,11 +66,11 @@ export class ColorPickerTriggerDirective {
 }
 ```
 
-You should notice few changes here - 
+You should notice few changes here -
 
 * Use `host` bindings to bind the click event to our click function
 * Use the `Input` decorator with the directive name - this enables us to input through the directive an instance of the `ColorPickerComponent`
-* Use the constructor DI to get the directive `ElementRef` so we can bind the `Overlay` position to it. 
+* Use the constructor DI to get the directive `ElementRef` so we can bind the `Overlay` position to it.
 
 Import the directive into the module
 
@@ -67,7 +80,7 @@ import { ColorPickerTriggerDirective } from './color-picker/color-picker-trigger
 
 @NgModule({
   declarations: [
-    AppComponent,    
+    AppComponent,
     ColorPickerComponent,
     ColorPickerTriggerDirective
   ],
@@ -127,14 +140,14 @@ In the `overlayConfig` we can specify that this overlay has a backdrop
 ```typescript
 private init() {
   ...
-  
+
   const overlayConfig = new OverlayConfig({
     maxWidth: 250,
     hasBackdrop: true,
     backdropClass: 'cdk-overlay-transparent-backdrop',
     positionStrategy
   });
-  
+
   this._overlayRef = this.overlay.create(overlayConfig);
 
   this._overlayRef
