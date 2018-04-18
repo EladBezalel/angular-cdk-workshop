@@ -11,6 +11,8 @@
 
 ### [Demo](https://stackblitz.com/github/EladBezalel/ngconf-cdk-workshop/tree/step-1)
 
+### [Initial setup demo](https://stackblitz.com/github/EladBezalel/ngconf-cdk-workshop/tree/initial-step)
+
 ## Step 1 task:
 
 Since we want to build this beautiful component
