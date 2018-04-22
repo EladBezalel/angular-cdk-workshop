@@ -39,7 +39,7 @@ export class ColorPickerComponent {
 </div>
 ```
 
-###### Create a new file: `src/app/color-picker/color-picker.component.html`
+###### Create a new file: `src/app/color-picker/color-picker.component.css`
 ```css
 .container {
   background-color: white;
