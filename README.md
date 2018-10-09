@@ -6,7 +6,7 @@ In this workshop we're going to create a `color picker` using the Angular Compon
 
 We will create an accessible, bi-directional, flexible, animated and beautiful material design color picker using built in modules from the CDK.
 
-## [Final demo](https://stackblitz.com/github/EladBezalel/ngconf-cdk-workshop/)
+## [Final demo](https://stackblitz.com/github/EladBezalel/angular-cdk-workshop/)
 
 #### Quick Jump ####
 * [Step 1](./steps/STEP_1.md)

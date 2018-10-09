@@ -9,9 +9,9 @@
 * [Step 8a](./STEP_8a.md)
 * [Step 8b](./STEP_8b.md)
 
-### [Demo](https://stackblitz.com/github/EladBezalel/ngconf-cdk-workshop/tree/step-1)
+### [Demo](https://stackblitz.com/github/EladBezalel/angular-cdk-workshop/tree/step-1)
 
-### [Initial setup demo](https://stackblitz.com/github/EladBezalel/ngconf-cdk-workshop/tree/initial-step)
+### [Initial setup demo](https://stackblitz.com/github/EladBezalel/angular-cdk-workshop/tree/initial-step)
 
 ## Step 1 task:
 

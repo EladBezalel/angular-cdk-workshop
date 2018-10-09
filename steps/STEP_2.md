@@ -9,7 +9,7 @@
 * [Step 8a](./STEP_8a.md)
 * [Step 8b](./STEP_8b.md)
 
-### [Demo](https://stackblitz.com/github/EladBezalel/ngconf-cdk-workshop/tree/step-2)
+### [Demo](https://stackblitz.com/github/EladBezalel/angular-cdk-workshop/tree/step-2)
 
 ## Step 2 task:
 

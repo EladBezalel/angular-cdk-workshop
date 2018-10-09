@@ -1,15 +1,12 @@
-import {Directive, ElementRef, Input, ViewContainerRef} from '@angular/core';
+import {Directive, ElementRef, HostListener, Input, ViewContainerRef} from '@angular/core';
 import {ColorPickerComponent} from './color-picker.component';
 import {Overlay, OverlayConfig, OverlayRef} from '@angular/cdk/overlay';
 import {TemplatePortal} from '@angular/cdk/portal';
-import {take} from 'rxjs/operators/take';
+import {take} from 'rxjs/operators';
 import {Directionality} from '@angular/cdk/bidi';
 
 @Directive({
-  selector: '[color-picker-trigger]',
-  host: {
-    '(click)': 'click($event)'
-  }
+  selector: '[color-picker-trigger]'
 })
 export class ColorPickerTriggerDirective {
   private _overlayRef: OverlayRef;
@@ -45,6 +42,7 @@ export class ColorPickerTriggerDirective {
       .subscribe(() => this._overlayRef.detach());
   }
 
+  @HostListener('click')
   click() {
     if (!this._overlayRef) {
       this.init();
